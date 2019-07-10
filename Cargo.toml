@@ -1,0 +1,11 @@
+[package]
+name = "threadpool-blocking"
+version = "0.1.0"
+authors = ["zero.qn zeroqn@outlook.com"]
+edition = "2018"
+license = "MIT"
+
+[dependencies]
+tokio-threadpool = "0.1"
+futures01 = { package = "futures", version = "0.1" }
+futures-preview = { version = "0.3.0-alpha.17", features = [ "compat" ] }
