@@ -67,7 +67,7 @@ where
             chunk.push(item);
         }
 
-        if chunk.len() > 0 {
+        if !chunk.is_empty() {
             pool_chunk(f, chunk);
         }
 
@@ -88,7 +88,7 @@ mod tests {
 
         let mut enter = tokio_executor::enter().unwrap();
         tokio_executor::with_default(&mut pool.sender(), &mut enter, |_enter| {
-            let blocking_fut = (0..10).into_iter().pool_blocking(|_| 1);
+            let blocking_fut = (0..10).pool_blocking(|_| 1);
 
             let result = block_on(blocking_fut);
             assert_eq!(result.len(), 10);
@@ -102,9 +102,7 @@ mod tests {
 
         let mut enter = tokio_executor::enter().unwrap();
         tokio_executor::with_default(&mut pool.sender(), &mut enter, |_enter| {
-            let blocking_fut = (0..99)
-                .into_iter()
-                .pool_chunk_blocking(10, |chunk| chunk.len());
+            let blocking_fut = (0..99).pool_chunk_blocking(10, |chunk| chunk.len());
 
             let result = block_on(blocking_fut);
             let len = (99 / 10) + 1;
