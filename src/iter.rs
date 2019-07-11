@@ -5,7 +5,8 @@ use futures::future::{join_all, FutureExt, TryFutureExt};
 
 use std::future::Future;
 
-pub type BlockingCollectionFuture<T> = Box<dyn Future<Output = Vec<Result<T, Canceled>>> + Unpin>;
+pub type BlockingCollectionFuture<T> =
+    Box<dyn Future<Output = Vec<Result<T, Canceled>>> + Send + Unpin>;
 
 pub trait BlockingIterator {
     type Item;

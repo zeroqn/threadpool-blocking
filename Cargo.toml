@@ -10,3 +10,6 @@ tokio-threadpool = "0.1"
 futures01 = { package = "futures", version = "0.1" }
 futures-preview = { version = "0.3.0-alpha.17", features = [ "compat" ] }
 tokio-executor = "0.1"
+
+[dev-dependencies]
+tokio = "0.1"
